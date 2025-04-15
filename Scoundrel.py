@@ -31,7 +31,7 @@ cardvalues = {
 }
 
 for suit in range(1, 5):
-    for value in range(1, 14):
+    for value in range(2, 15):
       display = ""
       if value == 11:
         display += "J"
@@ -39,18 +39,27 @@ for suit in range(1, 5):
         display += "Q"
       elif value == 13:
         display += "K"
-      elif value == 1:
+      elif value == 14:
         display += "A"
       else:
         display += str(value)
       if suit == 1:
+        if value >= 11:
+            allowed = False
+        else:
+            allowed = True 
         display += " ♡"
       elif suit == 2:
         display += " ♠"
       elif suit == 3:
+         if value >= 11:
+            allowed = False
+        else:
+            allowed = True 
         display += " ♢"
       elif suit == 4:
         display += " ♣"
+    if allowed:
       cards.append(display)
       
       
