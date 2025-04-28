@@ -9,7 +9,7 @@ def cls():
   os.system('cls' if os.name == 'nt' else 'clear')
 
 
-#generate deck
+# generate deck
 def make_deck():
   for suit in range(1, 5):
     for value in range(1, 14):
@@ -121,7 +121,7 @@ def poker():
   def call():
     bet = prior_bet
 
-  def bet_more():  #raise name wont work
+  def bet_more():  # raise name wont work
     print("how much more do you want to bet?")
     bet = prior_bet + input()
 
@@ -131,28 +131,28 @@ def poker():
     numberofvalues = []
     suittype = []
     numberofsuits = []
-    for i in range(len(drawn_Cards)):  #getting attributes from players cards
-      numericalvalue += drawn_Cards[i][:1]  #gets the number from players cards
+    for i in range(len(drawn_Cards)):  # getting attributes from players cards
+      numericalvalue += drawn_Cards[i][:1]  # gets the number from players cards
       sortednumericalvalue += drawn_Cards[
-          i][:1]  #gets the number from players cards
-      suittype += drawn_Cards[i][-1:]  #gets the number from player cards
+          i][:1]  # gets the number from players cards
+      suittype += drawn_Cards[i][-1:]  # gets the number from player cards
     for i in range(
-        len(community_cards)):  #getting attributes from community cards
+        len(community_cards)):  # getting attributes from community cards
       numericalvalue += community_cards[
-          i][:1]  #gets the number from community cards
+          i][:1]  # gets the number from community cards
       sortednumericalvalue += community_cards[
-          i][:1]  #gets the number from community cards #type:ignore
-      suittype += community_cards[i][-1:]  #gets the suit from community cards
-    for i in range(len(numericalvalue)):  #for each card...
+          i][:1]  # gets the number from community cards #type:ignore
+      suittype += community_cards[i][-1:]  # gets the suit from community cards
+    for i in range(len(numericalvalue)):  # for each card...
       numberofvalues.append(
           numericalvalue.count(numericalvalue[i])
-      )  #...prints how many of each number in play there are #type: ignore
-    print()  #line break
-    for i in range(len(suittype)):  #for each suit...
+      )  # ...prints how many of each number in play there are #type: ignore
+    print()  # line break
+    for i in range(len(suittype)):  # for each suit...
       numberofsuits.append(suittype.count(
-          suittype[i]))  #...print how many of each suits
+          suittype[i]))  # ...print how many of each suits
 
-    #finding straights
+    # finding straights
 
     for i in range(len(sortednumericalvalue)):
       if sortednumericalvalue[i] == '1':
@@ -170,18 +170,17 @@ def poker():
         sortednumericalvalue[i] = int(sortednumericalvalue[i])
     sortednumericalvalue.sort()
     straightfinder = []
-    for i in range(14):  #the following repeats 14 times
-      if i + 1 in sortednumericalvalue:  #if the number is in the total set of cards
-        straightfinder.append(i + 1)  #add to the list of all the cards
+    for i in range(14):  # the following repeats 14 times
+      if i + 1 in sortednumericalvalue:  # if the number is in the total set of cards
+        straightfinder.append(i + 1)  # add to the list of all the cards
     straightcountdown = 0
     straighted = []
     straight = False
     for i in range(len(straightfinder) -
-                   1):  #for the length of the priorly stated list
-      if straightfinder[
-          i] + 1 in straightfinder:  #if the following value is in the list
-        straightcountdown += 1  #add to the countdown
-        if straightcountdown == 4:  #if the coundown is equal to four then add the last 5 values to a list #type:ignore
+                   1):  # for the length of the priorly stated list
+      if straightfinder[i] + 1 in straightfinder:  # if the following value is in the list
+        straightcountdown += 1  # add to the countdown
+        if straightcountdown == 4:  # if the coundown is equal to four then add the last 5 values to a list #type:ignore
           straighted.append(straightfinder[i] + 1)
           straighted.append(straightfinder[i])
           straighted.append(straightfinder[i] - 1)
@@ -189,19 +188,19 @@ def poker():
           straighted.append(straightfinder[i] - 3)
         elif straightcountdown > 4:
           straighted.append(straightfinder[i] +
-                            1)  #otherwise add the last card
-          straight = True  #if the countdown is greater than 4 then its a straight
+                            1)  # otherwise add the last card
+          straight = True  # if the countdown is greater than 4 then its a straight
       else:
-        straightcountdown = 0  #if the countdown gets interupted then the coundown is reset #type:ignore
-    straighted.sort()  #sorting the list
+        straightcountdown = 0  # if the countdown gets interupted then the coundown is reset #type:ignore
+    straighted.sort()  # sorting the list
     royal = False
-    if straight and 14 in straighted:  #if high ace is in the list then it is royal
+    if straight and 14 in straighted:  # if high ace is in the list then it is royal
       royal = True
 
-    #finding a flush
+    # finding a flush
 
     flush = False
-    for i in range(8):  #flush magic that i dont know how it works
+    for i in range(8):  # flush magic that i dont know how it works
       if i + 5 in numberofsuits:
         flush = True
 
@@ -254,16 +253,16 @@ def poker():
   print_drawn_cards()
   get_hand_type()
   input()
-  #betting
+  # betting
   flop()
   input()
-  #betting
+  # betting
   turn()
   input()
-  #betting
+  # betting
   river()
   input()
-  #final bet
+  # final bet
 
 
 playagain = True
