@@ -1,3 +1,4 @@
+
 import random
 
 cards = []
@@ -74,13 +75,13 @@ def EntranceStory(objType,objValue):
         print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
         
 MakeDeck()
-random.shuffle(cards)
 print("Deck created...")
-print("loading room...")
+random.shuffle(cards)
 
+print("loading room...")
 room = cards[:4]
 print(room)
 card = ''
 for encounter in range(len(room)):
     card = room[encounter]
-    EntranceStory(card[-1:],card[:-2])
+    EntranceStory(card[-1:],abs(cardvalues[card]))
