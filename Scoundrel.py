@@ -1,3 +1,6 @@
+# going to rename this later to blackguard
+# why? because its cool
+
 
 import random
 
