@@ -8,7 +8,7 @@ def cls():
 
 tens = ['1','J','Q','K']
 
-# generate deck
+# Generate deck
 def make_deck():
     for suit in range(1, 5):
         for value in range(1, 14):
@@ -96,13 +96,13 @@ def black_jack():
                 value += 10
             elif drawn_Cards[i][:1] == 'A':
                 if value >= 11:
-                    #having greater than 11 makes ace equal to 1
+                    # Having greater than 11 makes ace equal to 1
                     value += 1
                 else:
                     value += 11
             else:
                 value += int(drawn_Cards[i][:1])
-                #this finds the value of the first digit
+                # This finds the value of the first digit
         if player == "house":
             houseScore = value
         elif player == "player":
@@ -137,7 +137,7 @@ def black_jack():
             if find_player_value("player") >= 21:
                 hitstand = "s"
         if hitstand == 's':
-            # houses turn
+            # Houses turn
             for _ in range(2):
                 cls()
                 House_draw(1)
