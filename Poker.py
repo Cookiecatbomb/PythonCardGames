@@ -1,15 +1,17 @@
+
 import os
 import random
 import time
 
-from readchar import key, readkey
-
+#from readchar import key, readkey
+# Not needed?
 
 def cls():
+  # Does this even work?
   os.system('cls' if os.name == 'nt' else 'clear')
 
 
-# generate deck
+# Generate deck
 def make_deck():
   for suit in range(1, 5):
     for value in range(1, 14):
@@ -32,60 +34,65 @@ def make_deck():
         display += " ♢"
       elif suit == 4:
         display += " ♣"
-      cards.append(display)
+      Cards.append(display)
 
 
-def addcards(value, suit):
-  cards.append(str(value + ' ' + suit))
+def add_cards(value, suit):
+  # Now this is the cool deck editing software update
+  Cards.append(str(value + ' ' + suit))
+  # That's it?
 
 
-def draw(draw):
-  global cards
-  global drawn_Cards
-  for i in range(draw):
-    drawn_Cards.append(cards[i])
-  cards = cards[draw:]
+def draw(Draw):
+  global Cards
+  global DrawnCards
+  for i in range(Draw):
+    DrawnCards.append(Cards[i])
+  Cards = Cards[Draw:]
 
 
 def community_draw(draw):
-  global cards
-  global community_cards
+  # This finds the top "i" cards in the deck and returns it
+  global Cards
+  global CommunityCards
   for i in range(draw):
-    community_cards.append(cards[i])
-  cards = cards[draw:]
+    CommunityCards.append(Cards[i])
+  Cards = Cards[draw:]
 
 
-def shuffle(refill):
-  global cards
-  if refill:
-    cards = []
+def shuffle(Refill):
+  # This uses the random import 
+  global Cards
+  if Refill:
+    Cards = []
     make_deck()
-  random.shuffle(cards)
+  random.shuffle(Cards)
 
 
-def discard(discard):
-  global cards
-  cards = cards[discard:]
+def discard(Discard):
+  # This removes cards directly from the deck
+  global Cards
+  Cards = Cards[Discard:]
 
 
 def print_drawn_cards():
   print('Your cards:')
-  for i in range(len(drawn_Cards)):
-    print(drawn_Cards[i])
+  for i in range(len(DrawnCards)):
+    print(DrawnCards[i])
   print()
 
 
 def print_commuity_cards():
   print('Community cards:')
-  for i in range(len(community_cards)):
-    print(community_cards[i])
+  for i in range(len(CommunityCards)):
+    print(CommunityCards[i])
   print()
 
 
 def poker():
-  global cards
-  global drawn_Cards
-  global community_cards
+  global Cards
+  global DrawnCards
+  global CommunityCards
   cls()
 
   def flop():
@@ -119,152 +126,156 @@ def poker():
     print('you coward')
 
   def call():
-    bet = prior_bet
+    #bet = PriorBet
+    print("hello world")
 
-  def bet_more():  # raise name wont work
+  def bet_more():  # Raise name won't work
     print("how much more do you want to bet?")
-    bet = prior_bet + input()
+    #bet = PriorBet + input()
 
   def get_hand_type():
-    numericalvalue = []
-    sortednumericalvalue = []
-    numberofvalues = []
+    NumericalValue = []
+    SortedNumericalValue = []
+    NumberOfValues = []
     suittype = []
-    numberofsuits = []
-    for i in range(len(drawn_Cards)):  # getting attributes from players cards
-      numericalvalue += drawn_Cards[i][:1]  # gets the number from players cards
-      sortednumericalvalue += drawn_Cards[
-          i][:1]  # gets the number from players cards
-      suittype += drawn_Cards[i][-1:]  # gets the number from player cards
+    NumberOfSuits = []
+    for i in range(len(DrawnCards)):
+      # Getting attributes from players cards
+      # Gets the number from players cards
+      NumericalValue += DrawnCards[i][:1] 
+      SortedNumericalValue += DrawnCards[i][:1]
+      suittype += DrawnCards[i][-1:]
     for i in range(
-        len(community_cards)):  # getting attributes from community cards
-      numericalvalue += community_cards[
-          i][:1]  # gets the number from community cards
-      sortednumericalvalue += community_cards[
-          i][:1]  # gets the number from community cards #type:ignore
-      suittype += community_cards[i][-1:]  # gets the suit from community cards
-    for i in range(len(numericalvalue)):  # for each card...
-      numberofvalues.append(
-          numericalvalue.count(numericalvalue[i])
-      )  # ...prints how many of each number in play there are #type: ignore
+        len(CommunityCards)):  
+      # Getting attributes from community cards
+      # Gets the number from community cards
+      NumericalValue += CommunityCards[i][:1]
+      SortedNumericalValue += CommunityCards[i][:1]
+      # Gets the suit from community cards
+      suittype += CommunityCards[i][-1:]
+    for i in range(len(NumericalValue)):
+      # For each card Prints how many of each number in play there are
+      NumberOfValues.append(NumericalValue.count(NumericalValue[i]))  
     print()  # line break
-    for i in range(len(suittype)):  # for each suit...
-      numberofsuits.append(suittype.count(
-          suittype[i]))  # ...print how many of each suits
+    for i in range(len(suittype)):  # 
+      # For each suit print how many of each suits
+      NumberOfSuits.append(suittype.count(suittype[i]))
+    # Finding straights
 
-    # finding straights
-
-    for i in range(len(sortednumericalvalue)):
-      if sortednumericalvalue[i] == '1':
-        sortednumericalvalue[i] = 10
-      elif sortednumericalvalue[i] == 'J':
-        sortednumericalvalue[i] = 11
-      elif sortednumericalvalue[i] == 'Q':
-        sortednumericalvalue[i] = 12
-      elif sortednumericalvalue[i] == 'K':
-        sortednumericalvalue[i] = 13
-      elif sortednumericalvalue[i] == 'A':
-        sortednumericalvalue[i] = 1
-        sortednumericalvalue.append(14)
+    for i in range(len(SortedNumericalValue)):
+      if SortedNumericalValue[i] == '1':
+        SortedNumericalValue[i] = 10
+      elif SortedNumericalValue[i] == 'J':
+        SortedNumericalValue[i] = 11
+      elif SortedNumericalValue[i] == 'Q':
+        SortedNumericalValue[i] = 12
+      elif SortedNumericalValue[i] == 'K':
+        SortedNumericalValue[i] = 13
+      elif SortedNumericalValue[i] == 'A':
+        SortedNumericalValue[i] = 1
+        SortedNumericalValue.append(14)
       else:
-        sortednumericalvalue[i] = int(sortednumericalvalue[i])
-    sortednumericalvalue.sort()
-    straightfinder = []
-    for i in range(14):  # the following repeats 14 times
-      if i + 1 in sortednumericalvalue:  # if the number is in the total set of cards
-        straightfinder.append(i + 1)  # add to the list of all the cards
-    straightcountdown = 0
-    straighted = []
-    straight = False
-    for i in range(len(straightfinder) -
-                   1):  # for the length of the priorly stated list
-      if straightfinder[i] + 1 in straightfinder:  # if the following value is in the list
-        straightcountdown += 1  # add to the countdown
-        if straightcountdown == 4:  # if the coundown is equal to four then add the last 5 values to a list #type:ignore
-          straighted.append(straightfinder[i] + 1)
-          straighted.append(straightfinder[i])
-          straighted.append(straightfinder[i] - 1)
-          straighted.append(straightfinder[i] - 2)
-          straighted.append(straightfinder[i] - 3)
-        elif straightcountdown > 4:
-          straighted.append(straightfinder[i] +
-                            1)  # otherwise add the last card
-          straight = True  # if the countdown is greater than 4 then its a straight
+        SortedNumericalValue[i] = int(SortedNumericalValue[i])
+    SortedNumericalValue.sort()
+    StraightFinder = []
+    # The following repeats 14 times
+    for i in range(14):
+      # If the number is in the total set of cards
+      if i + 1 in SortedNumericalValue:
+        # Add to the list of all the cards
+        StraightFinder.append(i + 1)  
+    StraightCountdown = 0
+    Straighted = []
+    Straight = False
+    for i in range(len(StraightFinder) -
+                   1):  # For the length of the priorly stated list
+      if StraightFinder[i] + 1 in StraightFinder:  # If the following value is in the list
+        StraightCountdown += 1  # Add to the countdown
+        if StraightCountdown == 4:  # If the countdown is equal to four then add the last 5 values to a list #type:ignore
+          Straighted.append(StraightFinder[i] + 1)
+          Straighted.append(StraightFinder[i])
+          Straighted.append(StraightFinder[i] - 1)
+          Straighted.append(StraightFinder[i] - 2)
+          Straighted.append(StraightFinder[i] - 3)
+        elif StraightCountdown > 4:
+          Straighted.append(StraightFinder[i] +
+                            1)  # Otherwise add the last card
+          Straight = True  # If the countdown is greater than 4 then it's a straight
       else:
-        straightcountdown = 0  # if the countdown gets interupted then the coundown is reset #type:ignore
-    straighted.sort()  # sorting the list
-    royal = False
-    if straight and 14 in straighted:  # if high ace is in the list then it is royal
-      royal = True
+        StraightCountdown = 0  # If the countdown gets interrupted then the countdown is reset #type:ignore
+    Straighted.sort()  # Sorting the list
+    Royal = False
+    if Straight and 14 in Straighted:  # If high ace is in the list then it is royal
+      Royal = True
 
-    # finding a flush
-
-    flush = False
-    for i in range(8):  # flush magic that i dont know how it works
-      if i + 5 in numberofsuits:
-        flush = True
-
-    if numberofsuits.count(7) >= 7 and len(straighted) >= 7 and royal:
+    # Finding a flush.
+    # Flush magic that I don't know how it works
+    Flush = False
+    for i in range(8):  
+      if i + 5 in NumberOfSuits:
+        Flush = True
+    # Here comes the super cool logic for hand types
+    if NumberOfSuits.count(7) >= 7 and len(Straighted) >= 7 and Royal:
       print('royaler flusher')
-    elif numberofsuits.count(7) >= 7 and len(straighted) >= 7:
+    elif NumberOfSuits.count(7) >= 7 and len(Straighted) >= 7:
       print('harder, better, straighter, flusher')
-    elif numberofvalues.count(5) >= 5 and numberofvalues.count(2) >= 2:
+    elif NumberOfValues.count(5) >= 5 and NumberOfValues.count(2) >= 2:
       print('filled house')
-    elif numberofsuits.count(7) >= 7:
+    elif NumberOfSuits.count(7) >= 7:
       print('flusher')
-    elif len(straighted) >= 7:
+    elif len(Straighted) >= 7:
       print('straighter')
-    elif numberofvalues.count(5) >= 5 and flush:
+    elif NumberOfValues.count(5) >= 5 and Flush:
       print("flush five(balatro reference)")
-    elif numberofvalues.count(2) >= 2 and numberofvalues.count(
-        3) >= 3 and flush:
+    elif NumberOfValues.count(2) >= 2 and NumberOfValues.count(
+        3) >= 3 and Flush:
       print("flush house(balatro reference)")
-    elif numberofvalues.count(4) >= 4 and numberofvalues.count(3) >= 3:
+    elif NumberOfValues.count(4) >= 4 and NumberOfValues.count(3) >= 3:
       print('fuller house')
-    elif numberofvalues.count(5) >= 5:
+    elif NumberOfValues.count(5) >= 5:
       print("five of a kind(balatro reference)")
-    elif flush and straight and royal:
+    elif Flush and Straight and Royal:
       print("royal flush")
-    elif flush and straight:
+    elif Flush and Straight:
       print("straight flush")
-    elif numberofvalues.count(4) >= 4:
+    elif NumberOfValues.count(4) >= 4:
       print("four of a kind")
-    elif numberofvalues.count(2) >= 2 and numberofvalues.count(3) >= 3:
+    elif NumberOfValues.count(2) >= 2 and NumberOfValues.count(3) >= 3:
       print("full house")
-    elif flush:
+    elif Flush:
       print("flush")
-    elif straight:
+    elif Straight:
       print("straight")
-    elif numberofvalues.count(3) >= 3:
+    elif NumberOfValues.count(3) >= 3:
       print("three of a kind")
-    elif numberofvalues.count(2) >= 4:
+    elif NumberOfValues.count(2) >= 4:
       print("two pair")
-    elif numberofvalues.count(2) >= 2:
+    elif NumberOfValues.count(2) >= 2:
       print("pair")
     else:
       print("high card")
 
-  cards = []
-  drawn_Cards = []
-  community_cards = []
+  Cards = []
+  DrawnCards = []
+  CommunityCards = []
 
   shuffle(True)
   draw(2)
   print_drawn_cards()
   get_hand_type()
   input()
-  # betting
+  # Betting
   flop()
   input()
-  # betting
+  # Betting
   turn()
   input()
-  # betting
+  # Betting
   river()
   input()
-  # final bet
+  # Final bet
 
 
-playagain = True
-while playagain:
+PlayAgain = True
+while PlayAgain:
   poker()
