@@ -7,4 +7,4 @@ my main inspiration for these are my love for card games.
 
 anyways, enough of introductions.
 enjoy the games,
-because i assure you you will not enjoy the code.
+because i assure you you will likely not enjoy the code.
