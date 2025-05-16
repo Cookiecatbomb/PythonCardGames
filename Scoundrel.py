@@ -1,3 +1,4 @@
+
 # going to rename this later to blackguard
 # why? because its cool
 
@@ -69,7 +70,10 @@ def MakeDeck():
             if allowed:
                 cards.append(display)
 
-def EntranceStory(objType,objValue):
+def EntranceStory(objType,objValue,itteration,roomcount):
+    if itteration == 0:
+        if roomcount == 0:
+            print("You enter the dungeon")
     if objType == "♡":
         print('On the floor, you can see a health potion, looks like it could heal', objValue ,'of your hp')
     elif objType == "♢":
@@ -80,11 +84,11 @@ def EntranceStory(objType,objValue):
 MakeDeck()
 print("Deck created...")
 random.shuffle(cards)
-
 print("loading room...")
+roomcount = 0
 room = cards[:4]
 print(room)
 card = ''
 for encounter in range(len(room)):
     card = room[encounter]
-    EntranceStory(card[-1:],abs(cardvalues[card]))
+    EntranceStory(card[-1:],abs(cardvalues[card]),encounter,roomcount)
