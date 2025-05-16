@@ -74,6 +74,8 @@ def EntranceStory(objType,objValue,itteration,roomcount):
     if itteration == 0:
         if roomcount == 0:
             print("You enter the dungeon")
+        elif roomcount == 1:
+            print('The room shifts...')
     if objType == "♡":
         print('On the floor, you can see a health potion, looks like it could heal', objValue ,'of your hp')
     elif objType == "♢":
@@ -89,6 +91,16 @@ roomcount = 0
 room = cards[:4]
 print(room)
 card = ''
+'''
 for encounter in range(len(room)):
     card = room[encounter]
     EntranceStory(card[-1:],abs(cardvalues[card]),encounter,roomcount)
+'''
+if input("is this your fist time? y/n") == "y":
+    print("1 - first interaction")
+    print("2 - second interaction")
+    print("3 - third interaction")
+    print("4 - fourth interaction")
+    print("0 - reroll interactions")
+    print("Z - restart run")
+input('what is your action? ')
