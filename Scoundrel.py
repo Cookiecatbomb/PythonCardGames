@@ -104,7 +104,9 @@ def start_run():
         print("4 - fourth interaction")
         print("0 - reroll interactions")
         print("Z - restart run")
-    action = input('what is your action? ')
+    action = ""
+    while action not in ("1","2","3","4","0","Z"):
+        action = input('what is your action? ')
     roomContents ={
         "1": room[0],
         "2": room[1],
@@ -113,4 +115,6 @@ def start_run():
     }
     if action in roomContents:
         print(roomContents[action])
+    if action == "Z":
+        start_run()
 start_run()
