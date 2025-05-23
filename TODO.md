@@ -1,6 +1,19 @@
-format everything properly
+# To Do
+### FORMAT <ins>_EVRYTHING_</ins> PROPERLY
 
-scoundrel: 
+-----------
+## Scoundrel: 
 make it that it asks if you are new at the begining. 
 
-poker/blackjack: add betting
+add hp
+
+add hitting enemies
+
+
+-----------
+## Poker:
+add betting
+
+-----------
+## Blackjack:
+add betting
