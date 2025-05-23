@@ -83,24 +83,34 @@ def EntranceStory(objType,objValue,itteration,roomcount):
     elif objType == "♣" or objType == "♠":
         print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
         
-MakeDeck()
-print("Deck created...")
-random.shuffle(cards)
-print("loading room...")
-roomcount = 0
-room = cards[:4]
-print(room)
-card = ''
-'''
-for encounter in range(len(room)):
-    card = room[encounter]
-    EntranceStory(card[-1:],abs(cardvalues[card]),encounter,roomcount)
-'''
-if input("is this your fist time? y/n") == "y":
-    print("1 - first interaction")
-    print("2 - second interaction")
-    print("3 - third interaction")
-    print("4 - fourth interaction")
-    print("0 - reroll interactions")
-    print("Z - restart run")
-input('what is your action? ')
+def start_run():
+    MakeDeck()
+    print("Deck created...")
+    random.shuffle(cards)
+    print("loading room...")
+    roomCount = 0
+    room = cards[:4]
+    print(room)
+    card = ''
+    '''
+    for encounter in range(len(room)):
+        card = room[encounter]
+        EntranceStory(card[-1:],abs(cardvalues[card]),encounter,roomcount)
+    '''
+    if input("is this your fist time? y/n") == "y":
+        print("1 - first interaction")
+        print("2 - second interaction")
+        print("3 - third interaction")
+        print("4 - fourth interaction")
+        print("0 - reroll interactions")
+        print("Z - restart run")
+    action = input('what is your action? ')
+    roomContents ={
+        "1": room[0],
+        "2": room[1],
+        "3": room[2],
+        "4": room[3]
+    }
+    if action in roomContents:
+        print(roomContents[action])
+start_run()
