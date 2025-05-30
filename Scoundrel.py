@@ -1,4 +1,5 @@
 
+
 # going to rename this later to blackguard
 # why? because its cool
 
@@ -70,7 +71,7 @@ def MakeDeck():
             if allowed:
                 cards.append(display)
 
-def EntranceStory(objType,objValue,itteration,roomcount):
+def entrance_story(objType,objValue,itteration,roomcount):
     if itteration == 0:
         if roomcount == 0:
             print("You enter the dungeon")
@@ -82,6 +83,30 @@ def EntranceStory(objType,objValue,itteration,roomcount):
         print('Against the wall, you can see a weapon, looks like it could hit for', objValue ,'damage')
     elif objType == "♣" or objType == "♠":
         print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
+
+def interact_story(objType,objValue):
+    if objType == "♡":
+        print('You grab the health potion, it heals', objValue ,'points of your health')
+        hp += objValue
+    elif objType == "♢":
+        if weapon == "":
+            print('you pick up the weapon', objValue ,'damage')
+            # duribility, damage, its an actual weapon
+            weapon = {
+                "duribility" : objValue,
+                "damage" : objValue,
+                "weaponType" : objType
+            }
+    elif objType == "♣" or objType == "♠":
+        if weapon["duribility"] < objValue:
+            # fight bare handded
+            print("balls...")
+            hp -= objValue
+        if weapon["duribility"] >= objValue and weapon["duribility"] - 2 <= objValue and weapon["damage"] >= objValue:
+            # duribility currenty is basing itself off the weapon damage, where it should only start when the first enemy is killed
+            # this shows up when the user kills an enemy who has less hp than your damage but between your durrability and two less
+            print('you strike swiftly and deadly')
+        print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
         
 def start_run():
     MakeDeck()
@@ -90,12 +115,21 @@ def start_run():
     print("loading room...")
     roomCount = 0
     room = cards[:4]
+    print('setting weapon...')
+    weapon = {
+        "duribility" : 0,
+        "damage" : 0,
+        "weaponType" : "hand"
+    }
+    print("resetting hp")
+    hp = 20
     print(room)
     card = ''
     '''
+    # doesnt like to work right now
     for encounter in range(len(room)):
         card = room[encounter]
-        EntranceStory(card[-1:],abs(cardvalues[card]),encounter,roomcount)
+        entrance_story(card[-1:],abs(cardvalues[card]),encounter,roomcount)
     '''
     if input("is this your fist time? y/n") == "y":
         print("1 - first interaction")
