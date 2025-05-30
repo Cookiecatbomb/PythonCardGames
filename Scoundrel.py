@@ -108,19 +108,20 @@ def interact_story(objType,objValue):
             print("balls...")
             hp -= objValue
         if weapon["duribility"] > objValue and weapon["duribility"] - 2 <= objValue and weapon["damage"] >= objValue:
+            print('you strike the creature down swiftly and deadly')
             # this shows up when the user kills an enemy who:
             #   - has less hp than your damage
             #   - has hp bewteen your weapon durability and two less of it (exc - inc)
-            # effective use of your weapon
-            print('you strike the creature down swiftly and deadly')
             weapon['duribility'] = objValue
+            # effective use of your weapon
             # remove enemy
         elif weapon["duribility"] - 3 >= objValue and weapon["damage"] >= objValue:
+            print('you wildly chop into the creature')
             # this shows up whan the user kills an enemy who:
             #   - has less hp than your damage
             #   - has less hp than your weapon duribility minus 3 (inc)
             # lackluster use of your weapon
-            print('you wildly chop into the creature')
+            
         print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
         
 def start_run():
@@ -136,7 +137,7 @@ def start_run():
         "damage" : 0,
         "weaponType" : "hand"
     }
-    print("resetting hp")
+    print("resetting hp...")
     hp = 20
     print(room)
     card = ''
@@ -144,6 +145,7 @@ def start_run():
     # doesnt like to work right now
     for encounter in range(len(room)):
         card = room[encounter]
+        # encounter was meant to be so that it could go like, "after the room shifts you see x"
         entrance_story(card[-1:],abs(cardvalues[card]),encounter,roomcount)
     '''
     if input("is this your fist time? y/n") == "y":
@@ -151,11 +153,12 @@ def start_run():
         print("2 - second interaction")
         print("3 - third interaction")
         print("4 - fourth interaction")
-        print("0 - reroll interactions")
+        print("0 - reroll interactions (one time in a row)")
         print("Z - restart run")
     action = ""
-    while action not in ("1","2","3","4","0","Z"):
+    while action not in ("1","2","3","4","0","z"):
         action = input('what is your action? ')
+        action = action.lower()
     roomContents ={
         "1": room[0],
         "2": room[1],
@@ -164,6 +167,8 @@ def start_run():
     }
     if action in roomContents:
         print(roomContents[action])
-    if action == "Z":
+        interact_story( roomContents[action][-1:], abs(cardvalues[roomContents[action]]) 
+    if action == "z":
         start_run()
+        
 start_run()
