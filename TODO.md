@@ -9,7 +9,9 @@ add hp
 
 add hitting enemies
 
+### want to do:
 
+add changing stories (eventualy)
 -----------
 ## Poker:
 add betting
