@@ -1,7 +1,12 @@
-
-
 # going to rename this later to blackguard
 # why? because its cool
+
+'''
+    To do
+- duribility currenty is basing itself off the weapon damage, where it should only start when the first enemy is killed
+- remove the enemies
+
+'''
 
 
 import random
@@ -99,13 +104,23 @@ def interact_story(objType,objValue):
             }
     elif objType == "♣" or objType == "♠":
         if weapon["duribility"] < objValue:
-            # fight bare handded
+            # this happens when you dont have the required durability to use your weapon; you fight bare handed
             print("balls...")
             hp -= objValue
-        if weapon["duribility"] >= objValue and weapon["duribility"] - 2 <= objValue and weapon["damage"] >= objValue:
-            # duribility currenty is basing itself off the weapon damage, where it should only start when the first enemy is killed
-            # this shows up when the user kills an enemy who has less hp than your damage but between your durrability and two less
-            print('you strike swiftly and deadly')
+        if weapon["duribility"] > objValue and weapon["duribility"] - 2 <= objValue and weapon["damage"] >= objValue:
+            # this shows up when the user kills an enemy who:
+            #   - has less hp than your damage
+            #   - has hp bewteen your weapon durability and two less of it (exc - inc)
+            # effective use of your weapon
+            print('you strike the creature down swiftly and deadly')
+            weapon['duribility'] = objValue
+            # remove enemy
+        elif weapon["duribility"] - 3 >= objValue and weapon["damage"] >= objValue:
+            # this shows up whan the user kills an enemy who:
+            #   - has less hp than your damage
+            #   - has less hp than your weapon duribility minus 3 (inc)
+            # lackluster use of your weapon
+            print('you wildly chop into the creature')
         print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
         
 def start_run():
