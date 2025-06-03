@@ -167,8 +167,7 @@ def start_run():
     }
     if action in roomContents:
         print(roomContents[action])
-        interact_story( roomContents[action][-1:], abs(cardvalues[roomContents[action]]) 
+        interact_story( roomContents[action][-1:], abs(cardvalues[roomContents[action]]))
     if action == "z":
         start_run()
-        
 start_run()
