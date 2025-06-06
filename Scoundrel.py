@@ -1,5 +1,6 @@
 # going to rename this later to blackguard
 # why? because its cool
+# also, like "scoundrel" is a synonym of "rouge", "blackguard" is a synonym of "scoundrel"
 
 '''
     To do
@@ -76,6 +77,7 @@ def MakeDeck():
             if allowed:
                 cards.append(display)
 
+'''
 def entrance_story(objType,objValue,itteration,roomcount):
     if itteration == 0:
         if roomcount == 0:
@@ -88,24 +90,37 @@ def entrance_story(objType,objValue,itteration,roomcount):
         print('Against the wall, you can see a weapon, looks like it could hit for', objValue ,'damage')
     elif objType == "♣" or objType == "♠":
         print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
+'''
 
 def interact_story(objType,objValue):
+    global hp
+    global weapon
+    
     if objType == "♡":
         print('You grab the health potion, it heals', objValue ,'points of your health')
         hp += objValue
+        if hp > hpMax:
+            hp = hpMax
+        print(hp)
+        
     elif objType == "♢":
-        if weapon == "":
-            print('you pick up the weapon', objValue ,'damage')
-            # duribility, damage, its an actual weapon
-            weapon = {
-                "duribility" : objValue,
-                "damage" : objValue,
-                "weaponType" : objType
-            }
+        print(weapon)
+        if weapon["weaponType"] == "hand":
+            print('you pick up the weapon,', objValue ,'damage')
+        # duribility, damage, its an actual weapon
+        weapon = {
+            "duribility" : objValue,
+            "damage" : objValue,
+            "weaponType" : objType
+        }
+        print(weapon)
+
     elif objType == "♣" or objType == "♠":
+        # ask for what weapon is used
         if weapon["duribility"] < objValue:
             # this happens when you dont have the required durability to use your weapon; you fight bare handed
             print("balls...")
+            # take damage equal to the monster's 
             hp -= objValue
         if weapon["duribility"] > objValue and weapon["duribility"] - 2 <= objValue and weapon["damage"] >= objValue:
             print('you strike the creature down swiftly and deadly')
@@ -121,10 +136,13 @@ def interact_story(objType,objValue):
             #   - has less hp than your damage
             #   - has less hp than your weapon duribility minus 3 (inc)
             # lackluster use of your weapon
-            
-        print('Looking towards you, you see a monster staring you down, looks like it could hit you for', objValue ,'damage')
+            # remove enemy
         
 def start_run():
+    global hp
+    global weapon
+    global hpMax
+    
     MakeDeck()
     print("Deck created...")
     random.shuffle(cards)
@@ -139,15 +157,19 @@ def start_run():
     }
     print("resetting hp...")
     hp = 20
+    hpMax = 20
     print(room)
     card = ''
     '''
     # doesnt like to work right now
+    # ***definition commented out***
     for encounter in range(len(room)):
         card = room[encounter]
         # encounter was meant to be so that it could go like, "after the room shifts you see x"
         entrance_story(card[-1:],abs(cardvalues[card]),encounter,roomcount)
     '''
+    """
+    # just skipping this bit
     if input("is this your fist time? y/n") == "y":
         print("1 - first interaction")
         print("2 - second interaction")
@@ -155,6 +177,7 @@ def start_run():
         print("4 - fourth interaction")
         print("0 - reroll interactions (one time in a row)")
         print("Z - restart run")
+    """
     action = ""
     while action not in ("1","2","3","4","0","z"):
         action = input('what is your action? ')
@@ -166,8 +189,8 @@ def start_run():
         "4": room[3]
     }
     if action in roomContents:
-        print(roomContents[action])
-        interact_story( roomContents[action][-1:], abs(cardvalues[roomContents[action]]))
+        print(f"you chose", roomContents[action])
+        interact_story(roomContents[action][-1:], abs(cardvalues[roomContents[action]]))
     if action == "z":
         start_run()
 start_run()
