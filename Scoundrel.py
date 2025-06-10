@@ -122,6 +122,8 @@ def interact_story(objType,objValue):
             print("balls...")
             # take damage equal to the monster's 
             hp -= objValue
+            if hp > hpKill:
+                return('complete')
         if weapon["duribility"] > objValue and weapon["duribility"] - 2 <= objValue and weapon["damage"] >= objValue:
             print('you strike the creature down swiftly and deadly')
             # this shows up when the user kills an enemy who:
@@ -142,6 +144,7 @@ def start_run():
     global hp
     global weapon
     global hpMax
+    global hpKill
     
     MakeDeck()
     print("Deck created...")
@@ -158,28 +161,34 @@ def start_run():
     print("resetting hp...")
     hp = 20
     hpMax = 20
+    hpKill = 0
     print(room)
     card = ''
     '''
-    # doesnt like to work right now
-    # ***definition commented out***
-    for encounter in range(len(room)):
-        card = room[encounter]
-        # encounter was meant to be so that it could go like, "after the room shifts you see x"
-        entrance_story(card[-1:],abs(cardvalues[card]),encounter,roomcount)
+    hide:
+        # doesnt like to work right now
+        # ***definition commented out***
+        for encounter in range(len(room)):
+            card = room[encounter]
+            # encounter was meant to be so that it could go like, "after the room shifts you see x"
+            entrance_story(card[-1:],abs(cardvalues[card]),encounter,roomcount)
     '''
+    
     """
-    # just skipping this bit
-    if input("is this your fist time? y/n") == "y":
-        print("1 - first interaction")
-        print("2 - second interaction")
-        print("3 - third interaction")
-        print("4 - fourth interaction")
-        print("0 - reroll interactions (one time in a row)")
-        print("Z - restart run")
+    hide:
+        # just skipping this bit
+        if input("is this your fist time? y/n") == "y":
+            print("1 - first interaction")
+            print("2 - second interaction")
+            print("3 - third interaction")
+            print("4 - fourth interaction")
+            print("0 - reroll interactions (one time in a row)")
+            print("Z - restart run")
     """
+    
     action = ""
-    while action not in ("1","2","3","4","0","z"):
+    actionsLeft = ("1","2","3","4","0","z")
+    while action not in actionsLeft:
         action = input('what is your action? ')
         action = action.lower()
     roomContents ={
