@@ -187,8 +187,9 @@ def start_run():
     """
     
     action = ""
-    actionsLeft = ("1","2","3","4","0","z")
-    while action not in actionsLeft:
+    action 
+    while action not in a
+    action ctionsLeft:
         action = input('what is your action? ')
         action = action.lower()
     roomContents ={
@@ -198,8 +199,10 @@ def start_run():
         "4": room[3]
     }
     if action in roomContents:
-        print(f"you chose", roomContents[action])
+        print(f"you chose {roomContents[action]}")
         interact_story(roomContents[action][-1:], abs(cardvalues[roomContents[action]]))
+        del roomContents[action]
+        print(roomContents)
     if action == "z":
         start_run()
 start_run()
